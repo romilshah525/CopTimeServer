@@ -14,28 +14,23 @@ exports.MessageQuery = {
 
 exports.MessageMutation = {
 	messageCreateOne: MessageTC.getResolver('createOne').wrapResolve(next => async rp => {
-		let ret;
 		let messages = await Message.findOne({ firID: rp.args.record.firID }, async function (err, doc) {
-			if (doc != undefined) {
+			if (doc) {
 				let content = {
 					text: rp.args.record.content[0].text,
 					timestamp: rp.args.record.content[0].timestamp,
 					senderID: mongoose.Types.ObjectId(rp.args.record.content[0].senderID),
 				}
 				doc.content = [...doc.content, content];
-				await doc.save();
-				// pubsub.publish(constants.ANY_MESSAGES_FOR_ME, { newlyCreatedMessage: rp.args.record, for: rp.args.record.receiverID });
-				// return doc;
-				ret = doc;
+				let msg = await doc.save();
+				return msg;
 			} else {
 				let msg = await next(rp);
-				// pubsub.publish(constants.ANY_MESSAGES_FOR_ME, { newlyCreatedMessage: rp.args.record, for: rp.args.record.receiverID });
-				// return msg;
-				ret = msg;
+				return msg;
 			}
-			pubsub.publish(constants.ANY_MESSAGES_FOR_ME, { newlyCreatedMessage: rp.args.record, for: rp.args.record.receiverID });
 		});
-		return ret;
+		pubsub.publish(constants.ANY_MESSAGES_FOR_ME, { newlyCreatedMessage: rp.args.record, for: rp.args.record.receiverID });
+		return messages;
 	}),
 	messageUpdateOne: MessageTC.getResolver('updateOne'),
 	messageRemoveOne: MessageTC.getResolver('removeOne'),
