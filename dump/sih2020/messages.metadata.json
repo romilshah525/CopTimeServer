@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"sih2020.messages"}],"uuid":"1215eb641a2d4e8e8e80e16686644d3f"}

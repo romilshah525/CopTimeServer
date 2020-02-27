@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"pharmacy.users"}],"uuid":"d7c21a4a4d3e4e72b7bc036f83ddbc8e"}

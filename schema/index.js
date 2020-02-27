@@ -2,7 +2,7 @@ const { SchemaComposer } = require('graphql-compose');
 const schemaComposer = new SchemaComposer();
 
 const { AadharMutation, AadharQuery } = require('./aadhar');
-const { BroadCastMutation, BroadCastQuery } = require('./broadcast');
+const { BroadCastSubscription, BroadCastMutation, BroadCastQuery } = require('./broadcast');
 const { CaseMutation, CaseQuery } = require('./cases');
 const { MessageMutation, MessageQuery } = require('./message');
 const { PoliceMutation, PoliceQuery } = require('./police');
@@ -29,8 +29,8 @@ schemaComposer.Mutation.addFields({
     ...UserMutation,
 });
 
-// schemaComposer.Subscription.addFields({
-//     ...TaskSubscription,
-// });
+schemaComposer.Subscription.addFields({
+    ...BroadCastSubscription,
+});
 
 exports.schema = schemaComposer.buildSchema();
