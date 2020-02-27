@@ -23,7 +23,8 @@ const UserSchema = new mongoose.Schema(
 			}
 		},
 		policeStation: {
-			type: String,
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'PoliceStation',
 			required: true
 		},
 		isVolunteer: {

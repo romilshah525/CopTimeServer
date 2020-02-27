@@ -1,7 +1,17 @@
-const { PoliceStationTC } = require('../models/policeStation');
+const { PoliceStationTC, PoliceStation } = require('../models/policeStation');
+
+PoliceStationTC.addResolver({
+	name: 'findAll',
+	args: {},
+	type: [PoliceStationTC],
+	resolve: async ({ source, args }) => {
+		return await PoliceStation.find({});
+	},
+});
 
 exports.PoliceStationQuery = {
 	policeStationById: PoliceStationTC.getResolver('findById'),
+	policeStationFindAll: PoliceStationTC.getResolver('findAll'),
 	policeStationOne: PoliceStationTC.getResolver('findOne'),
 	policeStationCount: PoliceStationTC.getResolver('count'),
 };

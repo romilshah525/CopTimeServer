@@ -1,7 +1,17 @@
-const { UserTC } = require('../models/users');
+const { User, UserTC } = require('../models/users');
+
+UserTC.addResolver({
+	name: 'findAll',
+	args: {},
+	type: [UserTC],
+	resolve: async ({ source, args }) => {
+		return await User.find({});
+	},
+});
 
 exports.UserQuery = {
 	userById: UserTC.getResolver('findById'),
+	userFindAll: UserTC.getResolver('findAll'),
 	userOne: UserTC.getResolver('findOne'),
 	userMany: UserTC.getResolver('findMany'),
 	userCount: UserTC.getResolver('count'),

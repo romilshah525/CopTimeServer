@@ -7,7 +7,7 @@ AadharTC.addResolver({
 	resolve: async ({ source, args }) => {
 		return await Aadhar.find({});
 	},
-})
+});
 
 exports.AadharQuery = {
 	aadharFindAll: AadharTC.getResolver('findAll'),
