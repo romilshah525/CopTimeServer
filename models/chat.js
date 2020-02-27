@@ -3,16 +3,6 @@ const mongoose = require('mongoose');
 
 const MessageSchema = new mongoose.Schema(
 	{
-		senderID: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'User' || 'Police',
-			required: true
-		},
-		receiverID: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'User' || 'Police',
-			required: true
-		},
 		firID: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Case',

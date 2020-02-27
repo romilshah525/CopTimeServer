@@ -2,7 +2,7 @@ const { PubSub, withFilter } = require('apollo-server-express');
 const mongoose = require('mongoose');
 
 const { PoliceTC, Police } = require('../models/police');
-const { MessageTC } = require('../models/message');
+const { MessageTC } = require('../models/chat');
 const constants = require('../constants');
 
 const pubsub = new PubSub();
