@@ -38,12 +38,3 @@ exports.UserSubscription = {
 		subscribe: () => pubsub.asyncIterator(constants.LISTENER_FOR_BROADCAST),
 	},
 };
-// exports.BroadCastSubscription = {
-// 	newBroadCast: {
-// 		type: BroadcastTC,
-// 		resolve: (payload, args) => {
-// 			return payload.newlyCreatedBroadCast;
-// 		},
-// 		subscribe: () => pubsub.asyncIterator(constants.LISTENER_FOR_BROADCAST),
-// 	},
-// };

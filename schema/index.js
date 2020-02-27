@@ -4,10 +4,10 @@ const schemaComposer = new SchemaComposer();
 const { AadharMutation, AadharQuery } = require('./aadhar');
 const { BroadCastSubscription, BroadCastMutation, BroadCastQuery } = require('./broadcast');
 const { CaseMutation, CaseQuery } = require('./cases');
-const { MessageMutation, MessageQuery } = require('./message');
-const { PoliceSubscription, PoliceMutation, PoliceQuery } = require('./police');
+const { MessageSubscription, MessageMutation, MessageQuery } = require('./message');
+const { PoliceMutation, PoliceQuery } = require('./police');
 const { PoliceStationMutation, PoliceStationQuery } = require('./policeStation');
-const { UserSubscription, UserMutation, UserQuery } = require('./users');
+const { UserMutation, UserQuery } = require('./users');
 
 schemaComposer.Query.addFields({
     ...AadharQuery,
@@ -31,8 +31,7 @@ schemaComposer.Mutation.addFields({
 
 schemaComposer.Subscription.addFields({
     ...BroadCastSubscription,
-    // ...PoliceSubscription,
-    // ...UserSubscription,
+    ...MessageSubscription
 });
 
 exports.schema = schemaComposer.buildSchema();

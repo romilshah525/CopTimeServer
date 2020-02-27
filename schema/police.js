@@ -28,13 +28,3 @@ exports.PoliceMutation = {
 	policeUpdateOne: PoliceTC.getResolver('updateOne'),
 	policeRemoveOne: PoliceTC.getResolver('removeOne'),
 };
-
-exports.PoliceSubscription = {
-	newBroadCast: {
-		type: [MessageTC],
-		resolve: (payload, args) => {
-			return payload.newlyCreatedBroadCast;
-		},
-		subscribe: () => pubsub.asyncIterator(constants.LISTENER_FOR_BROADCAST),
-	},
-};
