@@ -2,7 +2,7 @@ const { SchemaComposer } = require('graphql-compose');
 const schemaComposer = new SchemaComposer();
 
 const { TaskQuery, TaskMutation, TaskSubscription } = require('./task');
-const { TaskTC } = require('../models/task');
+const { TaskTC } = require('../models/aadhar');
 
 schemaComposer.Query.addFields({
     ...TaskQuery,

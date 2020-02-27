@@ -20,8 +20,8 @@ server.applyMiddleware({ app });
 const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
-mongoose.Promise = global.Promise;
-mongoose.set('useCreateIndex', true);
+// mongoose.Promise = global.Promise;
+// mongoose.set('useCreateIndex', true);
 
 const connectToDbAndServerAndGraphQLServer = async function () {
 	const connectionDetails = await mongoose.connect("mongodb://localhost/graphqltodo", {

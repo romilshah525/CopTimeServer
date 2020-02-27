@@ -1,4 +1,4 @@
-const { Task, TaskTC } = require('../models/task');
+const { Task, TaskTC } = require('../models/aadhar');
 const { PubSub } = require('apollo-server-express');
 const pubsub = new PubSub();
 const POST_ADDED = 'POST_ADDED';
