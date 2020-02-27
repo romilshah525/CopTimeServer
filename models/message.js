@@ -25,7 +25,7 @@ const MessageSchema = new mongoose.Schema(
 			},
 			timestamp: {
 				type: String,
-				required: true
+				required: false
 			},
 			senderID: {
 				type: mongoose.Schema.Types.ObjectId,

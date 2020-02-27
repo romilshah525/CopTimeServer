@@ -1,4 +1,11 @@
+const { PubSub, withFilter } = require('apollo-server-express');
+const { BroadcastTC } = require('../models/broadcast');
+const mongoose = require('mongoose');
+
+const { MessageTC } = require('../models/message');
 const { User, UserTC } = require('../models/users');
+const constants = require('../constants');
+const pubsub = new PubSub();
 
 UserTC.addResolver({
 	name: 'findAll',
@@ -21,3 +28,22 @@ exports.UserMutation = {
 	userUpdateById: UserTC.getResolver('updateById'),
 	userUpdateOne: UserTC.getResolver('updateOne'),
 };
+
+exports.UserSubscription = {
+	newBroadCast: {
+		type: MessageTC,
+		resolve: (payload, args) => {
+			return payload.newlyCreatedBroadCast;
+		},
+		subscribe: () => pubsub.asyncIterator(constants.LISTENER_FOR_BROADCAST),
+	},
+};
+// exports.BroadCastSubscription = {
+// 	newBroadCast: {
+// 		type: BroadcastTC,
+// 		resolve: (payload, args) => {
+// 			return payload.newlyCreatedBroadCast;
+// 		},
+// 		subscribe: () => pubsub.asyncIterator(constants.LISTENER_FOR_BROADCAST),
+// 	},
+// };
