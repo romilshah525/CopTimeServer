@@ -5,8 +5,8 @@ const constants = require('../constants');
 const pubsub = new PubSub();
 
 exports.BroadCastQuery = {
-	broadCastById: BroadcastTC.getResolver('findById'),
-	broadCastOne: BroadcastTC.getResolver('findOne'),
+	broadCastFindById: BroadcastTC.getResolver('findById'),
+	broadCastFindOne: BroadcastTC.getResolver('findOne'),
 	broadCastCount: BroadcastTC.getResolver('count'),
 };
 

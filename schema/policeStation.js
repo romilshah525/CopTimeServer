@@ -10,9 +10,9 @@ PoliceStationTC.addResolver({
 });
 
 exports.PoliceStationQuery = {
-	policeStationById: PoliceStationTC.getResolver('findById'),
+	policeStationFindOne: PoliceStationTC.getResolver('findOne'),
+	policeStationFindById: PoliceStationTC.getResolver('findById'),
 	policeStationFindAll: PoliceStationTC.getResolver('findAll'),
-	policeStationOne: PoliceStationTC.getResolver('findOne'),
 	policeStationCount: PoliceStationTC.getResolver('count'),
 };
 

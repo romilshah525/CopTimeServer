@@ -10,15 +10,14 @@ AadharTC.addResolver({
 });
 
 exports.AadharQuery = {
-	aadharFindAll: AadharTC.getResolver('findAll'),
-	aadharById: AadharTC.getResolver('findById'),
-	aadharOne: AadharTC.getResolver('findOne'),
-	aadharMany: AadharTC.getResolver('findMany'),
-	aadharCount: AadharTC.getResolver('count'),
+	aadharCardFindOne: AadharTC.getResolver('findOne'),
+	aadharCardFindById: AadharTC.getResolver('findById'),
+	aadharCardFindAll: AadharTC.getResolver('findAll'),
+	aadharCardTotalCount: AadharTC.getResolver('count'),
 };
 
 exports.AadharMutation = {
-	aadharCreateOne: AadharTC.getResolver('createOne'),
-	aadharUpdateById: AadharTC.getResolver('updateById'),
-	aadharUpdateOne: AadharTC.getResolver('updateOne'),
+	aadharCardCreateOne: AadharTC.getResolver('createOne'),
+	aadharCardUpdateById: AadharTC.getResolver('updateById'),
+	aadharCardUpdateOne: AadharTC.getResolver('updateOne'),
 };

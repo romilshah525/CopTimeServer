@@ -1,8 +1,8 @@
 const { MessageTC } = require('../models/message');
 
 exports.MessageQuery = {
-	messageById: MessageTC.getResolver('findById'),
-	messageOne: MessageTC.getResolver('findOne'),
+	messageFindOne: MessageTC.getResolver('findOne'),
+	messageFindById: MessageTC.getResolver('findById'),
 	messageCount: MessageTC.getResolver('count'),
 };
 

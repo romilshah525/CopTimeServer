@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"coptime.aadhars"}],"uuid":"b7ca0d550c3745b28938ebb7f4854b6f"}

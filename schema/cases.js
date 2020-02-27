@@ -1,8 +1,8 @@
 const { CaseTC } = require('../models/cases');
 
 exports.CaseQuery = {
-	caseById: CaseTC.getResolver('findById'),
-	caseOne: CaseTC.getResolver('findOne'),
+	caseFindById: CaseTC.getResolver('findById'),
+	caseFindOne: CaseTC.getResolver('findOne'),
 	caseCount: CaseTC.getResolver('count'),
 };
 
