@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema(
 	{
 		aadharCardNumber: {
-			type: Schema.Types.ObjectId,
+			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Aadhar',
 			required: true
 		},

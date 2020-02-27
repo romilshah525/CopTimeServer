@@ -20,17 +20,17 @@ const CaseSchema = new mongoose.Schema(
 			required: false
 		}],
 		reportedBy: {
-			type: Schema.Types.ObjectId,
+			type: mongoose.Schema.Types.ObjectId,
 			required: true,
 			ref: 'User'
 		},
 		reportedAt: {
-			type: Schema.Types.ObjectId,
+			type: mongoose.Schema.Types.ObjectId,
 			ref: 'PoliceStation',
 			required: true,
 		},
 		assignedTo: {
-			type: Schema.Types.ObjectId,
+			type: mongoose.Schema.Types.ObjectId,
 			required: true,
 			ref: 'Police',
 			default: null

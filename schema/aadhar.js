@@ -1,38 +1,24 @@
-const { composeWithMongoose } = require('graphql-compose-mongoose');
-const mongoose = require('mongoose');
+const { Aadhar, AadharTC } = require('../models/aadhar');
 
-const AadharSchema = new mongoose.Schema(
-	{
-		firstName: {
-			type: String,
-			required: true
-		},
-		lastName: {
-			type: String
-		},
-		emailID: {
-			type: String,
-			required: true
-		},
-		phoneNumber: [{
-			number: {
-				type: Number,
-				required: true
-			}
-		}],
-		aadharNumber: {
-			type: String,
-			required: true
-		},
-		address:{
-			type:String,
-			required:true
-		}
+AadharTC.addResolver({
+	name: 'findAll',
+	args: {},
+	type: [AadharTC],
+	resolve: async ({ source, args }) => {
+		return await Aadhar.find({});
 	},
-);
+})
 
-const Aadhar = mongoose.model('Aadhar', AadharSchema);
+exports.AadharQuery = {
+	aadharFindAll: AadharTC.getResolver('findAll'),
+	aadharById: AadharTC.getResolver('findById'),
+	aadharOne: AadharTC.getResolver('findOne'),
+	aadharMany: AadharTC.getResolver('findMany'),
+	aadharCount: AadharTC.getResolver('count'),
+};
 
-exports.AadharTC = composeWithMongoose(Aadhar);
-exports.AadharSchema = AadharSchema;
-exports.Aadhar = Aadhar;
+exports.AadharMutation = {
+	aadharCreateOne: AadharTC.getResolver('createOne'),
+	aadharUpdateById: AadharTC.getResolver('updateById'),
+	aadharUpdateOne: AadharTC.getResolver('updateOne'),
+};

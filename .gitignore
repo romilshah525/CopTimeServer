@@ -1,3 +1,9 @@
+#Database
+/data
+
+#VSCode
+.vscode/
+
 # Logs
 logs
 *.log

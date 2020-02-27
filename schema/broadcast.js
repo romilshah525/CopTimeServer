@@ -1,26 +1,13 @@
-const { composeWithMongoose } = require('graphql-compose-mongoose');
-const mongoose = require('mongoose');
+const { BroadcastTC } = require('../models/broadcast');
 
-const BroadcastSchema = new mongoose.Schema(
-	{
-		senderID: {
-			type: Schema.Types.ObjectId,
-			ref:'Police',
-			required: true
-		},
-		content:{
-			type:String,
-			required:true
-		},
-		timeStamp:{
-			type:String,
-			required:true
-		}
-	},
-);
+exports.BroadCastQuery = {
+	broadCastById: BroadcastTC.getResolver('findById'),
+	broadCastOne: BroadcastTC.getResolver('findOne'),
+	broadCastCount: BroadcastTC.getResolver('count'),
+};
 
-const Broadcast = mongoose.model('Broadcast', BroadcastSchema);
-
-exports.BroadcastTC = composeWithMongoose(Broadcast);
-exports.BroadcastSchema = BroadcastSchema;
-exports.Broadcast = Broadcast;
+exports.BroadCastMutation = {
+	broadCastCreateOne: BroadcastTC.getResolver('createOne'),
+	broadCastUpdateOne: BroadcastTC.getResolver('updateOne'),
+	broadCastRemoveOne: BroadcastTC.getResolver('removeOne'),
+};

@@ -4,17 +4,17 @@ const mongoose = require('mongoose');
 const MessageSchema = new mongoose.Schema(
 	{
 		senderID: {
-			type: Schema.Types.ObjectId,
+			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User' || 'Police',
 			required: true
 		},
 		receiverID: {
-			type: Schema.Types.ObjectId,
+			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User' || 'Police',
 			required: true
 		},
 		firID: {
-			type: Schema.Types.ObjectId,
+			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Case',
 			required: true
 		},
@@ -28,7 +28,7 @@ const MessageSchema = new mongoose.Schema(
 				required: true
 			},
 			senderID: {
-				type: Schema.Types.ObjectId,
+				type: mongoose.Schema.Types.ObjectId,
 				ref: 'User' || 'Police',
 				required: true
 			},

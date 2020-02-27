@@ -5,7 +5,7 @@ const http = require('http');
 const app = express();
 
 const { schema } = require('./schema');
-const port = 4000;
+const { PORT } = require('./constants');
 
 const server = new ApolloServer({
 	schema,
@@ -24,19 +24,21 @@ server.installSubscriptionHandlers(httpServer);
 // mongoose.set('useCreateIndex', true);
 
 const connectToDbAndServerAndGraphQLServer = async function () {
-	const connectionDetails = await mongoose.connect("mongodb://localhost/graphqltodo", {
+	const connectionDetails = await mongoose.connect("mongodb://localhost/coptime", {
 		useNewUrlParser: true,
 		useFindAndModify: false,
 		useUnifiedTopology: true
 	});
-	const portDetails = httpServer.listen(port);
+	const PORTDetails = httpServer.listen(PORT);
 	console.clear();
-	console.log(`==> Node Server started at http://localhost:${port}`);
-	console.log(`==> GraphQL Server ready at http://localhost:${port}${server.graphqlPath}`);
-	console.log(`==> Subscriptions ready at ws://localhost:${port}${server.subscriptionsPath}`);
+	console.log(`==> Node Server started at http://localhost:${PORT}`);
+	console.log(`==> GraphQL Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+	console.log(`==> Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`);
 	console.log("=========================================================");
 }
 
 connectToDbAndServerAndGraphQLServer();
 
-// "C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath "D:\Studies\Projects\Web Development (JS)\GraphQL\todo\todo\src\data"
+// yarn run db
+// yarn run start
+// "C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath "D:\Studies\Projects\Web Development (JS)\GraphQL\CopTimeServer\data"

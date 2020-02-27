@@ -1,21 +1,36 @@
 const { SchemaComposer } = require('graphql-compose');
 const schemaComposer = new SchemaComposer();
 
-const { TaskQuery, TaskMutation, TaskSubscription } = require('./task');
-const { TaskTC } = require('../models/aadhar');
+const { AadharMutation, AadharQuery } = require('./aadhar');
+const { BroadCastMutation, BroadCastQuery } = require('./broadcast');
+const { CaseMutation, CaseQuery } = require('./cases');
+const { MessageMutation, MessageQuery } = require('./message');
+const { PoliceMutation, PoliceQuery } = require('./police');
+const { PoliceStationMutation, PoliceStationQuery } = require('./policeStation');
+const { UserMutation, UserQuery } = require('./users');
 
 schemaComposer.Query.addFields({
-    ...TaskQuery,
-    
+    ...AadharQuery,
+    ...BroadCastQuery,
+    ...CaseQuery,
+    ...MessageQuery,
+    ...PoliceQuery,
+    ...PoliceStationQuery,
+    ...UserQuery,
 });
 
 schemaComposer.Mutation.addFields({
-    ...TaskMutation,
-    
+    ...AadharMutation,
+    ...BroadCastMutation,
+    ...CaseMutation,
+    ...MessageMutation,
+    ...PoliceMutation,
+    ...PoliceStationMutation,
+    ...UserMutation,
 });
 
-schemaComposer.Subscription.addFields({
-    ...TaskSubscription,
-});
+// schemaComposer.Subscription.addFields({
+//     ...TaskSubscription,
+// });
 
 exports.schema = schemaComposer.buildSchema();

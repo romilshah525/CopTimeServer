@@ -1,41 +1,14 @@
-const { composeWithMongoose } = require('graphql-compose-mongoose');
-const mongoose = require('mongoose');
+const { UserTC } = require('../models/users');
 
-const UserSchema = new mongoose.Schema(
-	{
-		aadharCardNumber: {
-			type: Schema.Types.ObjectId,
-			ref: 'Aadhar',
-			required: true
-		},
-		password: {
-			type: String,
-			required: true
-		},
-		homeLocation: {
-			latitude: {
-				type: String,
-				required: true
-			},
-			longitude: {
-				type: String,
-				required: true
-			}
-		},
-		policeStation: {
-			type: String,
-			required: true
-		},
-		isVolunteer: {
-			type: Boolean,
-			required: true,
-			default: false
-		}
-	},
-);
+exports.UserQuery = {
+	userById: UserTC.getResolver('findById'),
+	userOne: UserTC.getResolver('findOne'),
+	userMany: UserTC.getResolver('findMany'),
+	userCount: UserTC.getResolver('count'),
+};
 
-const User = mongoose.model('User', UserSchema);
-
-exports.UserTC = composeWithMongoose(User);
-exports.UserSchema = UserSchema;
-exports.User = User;
+exports.UserMutation = {
+	userCreateOne: UserTC.getResolver('createOne'),
+	userUpdateById: UserTC.getResolver('updateById'),
+	userUpdateOne: UserTC.getResolver('updateOne'),
+};

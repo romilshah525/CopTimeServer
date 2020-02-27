@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const BroadcastSchema = new mongoose.Schema(
 	{
 		senderID: {
-			type: Schema.Types.ObjectId,
+			type: mongoose.Schema.Types.ObjectId,
 			ref:'Police',
 			required: true
 		},

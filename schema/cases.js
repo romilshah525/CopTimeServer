@@ -1,50 +1,13 @@
-const { composeWithMongoose } = require('graphql-compose-mongoose');
-const mongoose = require('mongoose');
+const { CaseTC } = require('../models/cases');
 
-const CaseSchema = new mongoose.Schema(
-	{
-		firID: {
-			type: String,
-			required: true
-		},
-		title: {
-			type: String,
-			required: true
-		},
-		description: {
-			type: String,
-			required: true
-		},
-		images: [{
-			type: String,
-			required: false
-		}],
-		reportedBy: {
-			type: Schema.Types.ObjectId,
-			required: true,
-			ref: 'User'
-		},
-		reportedAt: {
-			type: Schema.Types.ObjectId,
-			ref: 'PoliceStation',
-			required: true,
-		},
-		assignedTo: {
-			type: Schema.Types.ObjectId,
-			required: true,
-			ref: 'Police',
-			default: null
-		},
-		status: {
-			type: String,
-			required: true,
-			default: 'Not Assigned'
-		}
-	},
-);
+exports.CaseQuery = {
+	caseById: CaseTC.getResolver('findById'),
+	caseOne: CaseTC.getResolver('findOne'),
+	caseCount: CaseTC.getResolver('count'),
+};
 
-const Case = mongoose.model('Case', CaseSchema);
-
-exports.CaseTC = composeWithMongoose(Case);
-exports.CaseSchema = CaseSchema;
-exports.Case = Case;
+exports.CaseMutation = {
+	caseCreateOne: CaseTC.getResolver('createOne'),
+	caseUpdateOne: CaseTC.getResolver('updateOne'),
+	caseRemoveOne: CaseTC.getResolver('removeOne'),
+};

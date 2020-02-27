@@ -4,12 +4,12 @@ const mongoose = require('mongoose');
 const PoliceSchema = new mongoose.Schema(
 	{
 		aadharCardNumber: {
-			type: Schema.Types.ObjectId,
+			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Aadhar',
 			required: true
 		},
 		stationAssigned: {
-			type: Schema.Types.ObjectId,
+			type: mongoose.Schema.Types.ObjectId,
 			ref: 'PoliceStation',
 			required: true
 		},
@@ -19,7 +19,7 @@ const PoliceSchema = new mongoose.Schema(
 		},
 		casesAssigned: [{
 			caseReference: {
-				type: Schema.Types.ObjectId,
+				type: mongoose.Schema.Types.ObjectId,
 				ref: 'Case',
 				required: true
 			},

@@ -3,20 +3,20 @@ const mongoose = require('mongoose');
 
 const PoliceStationSchema = new mongoose.Schema(
 	{
-		inspector: {
-			type: Schema.Types.ObjectId,
-			ref: 'Police',
-			required: true
-		},
+		// inspector: {
+		// 	type: mongoose.Schema.Types.ObjectId,
+		// 	ref: 'Police',
+		// 	required: true
+		// },
 		stationID: {
 			type: String,
-			required: trie
-		},
-		team: [{
-			type: Schema.Types.ObjectId,
-			ref: 'Police',
 			required: true
-		}]
+		},
+		// team: [{
+		// 	type: mongoose.Schema.Types.ObjectId,
+		// 	ref: 'Police',
+		// 	required: true
+		// }]
 	},
 );
 

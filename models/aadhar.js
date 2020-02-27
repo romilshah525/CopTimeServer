@@ -15,18 +15,16 @@ const AadharSchema = new mongoose.Schema(
 			required: true
 		},
 		phoneNumber: [{
-			number: {
-				type: Number,
-				required: true
-			}
+			type: Number,
+			required: true
 		}],
 		aadharNumber: {
 			type: String,
 			required: true
 		},
-		address:{
-			type:String,
-			required:true
+		address: {
+			type: String,
+			required: true
 		}
 	},
 );
