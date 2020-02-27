@@ -1,20 +1,19 @@
 const { PubSub, withFilter } = require('apollo-server-express');
 const mongoose = require('mongoose');
 
-const { BroadcastTC } = require('../models/broadcast');
-const { Message, MessageTC } = require('../models/chat');
+const { Chat,ChatTC } = require('../models/chat');
 const constants = require('../constants');
 const pubsub = new PubSub();
 
-exports.MessageQuery = {
-	messageFindOne: MessageTC.getResolver('findOne'),
-	messageFindById: MessageTC.getResolver('findById'),
-	messageCount: MessageTC.getResolver('count'),
+exports.ChatQuery = {
+	chatFindOne: ChatTC.getResolver('findOne'),
+	chatFindById: ChatTC.getResolver('findById'),
+	chatCount: ChatTC.getResolver('count'),
 };
 
-exports.MessageMutation = {
-	messageCreateOne: MessageTC.getResolver('createOne').wrapResolve(next => async rp => {
-		let messages = await Message.findOne({ firID: rp.args.record.firID }, async function (err, doc) {
+exports.ChatMutation = {
+	chatCreateOne: ChatTC.getResolver('createOne').wrapResolve(next => async rp => {
+		let messages = await Chat.findOne({ firID: rp.args.record.firID }, async function (err, doc) {
 			if (doc) {
 				let content = {
 					text: rp.args.record.content[0].text,
@@ -32,13 +31,11 @@ exports.MessageMutation = {
 		pubsub.publish(constants.ANY_MESSAGES_FOR_ME, { newlyCreatedMessage: rp.args.record, for: rp.args.record.receiverID });
 		return messages;
 	}),
-	messageUpdateOne: MessageTC.getResolver('updateOne'),
-	messageRemoveOne: MessageTC.getResolver('removeOne'),
 };
 
-exports.MessageSubscription = {
-	subscribeToMessages: {
-		type: MessageTC,
+exports.ChatSubscription = {
+	subscribeToChats: {
+		type: ChatTC,
 		args: { myself: 'String' },
 		resolve: (payload, args) => {
 			return payload.newlyCreatedMessage;

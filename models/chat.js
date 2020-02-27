@@ -1,7 +1,7 @@
 const { composeWithMongoose } = require('graphql-compose-mongoose');
 const mongoose = require('mongoose');
 
-const MessageSchema = new mongoose.Schema(
+const ChatSchema = new mongoose.Schema(
 	{
 		senderID: {
 			type: mongoose.Schema.Types.ObjectId,
@@ -41,8 +41,8 @@ const MessageSchema = new mongoose.Schema(
 	},
 );
 
-const Message = mongoose.model('Message', MessageSchema);
+const Chat = mongoose.model('Chat', ChatSchema);
 
-exports.MessageTC = composeWithMongoose(Message);
-exports.MessageSchema = MessageSchema;
-exports.Message = Message;
+exports.ChatTC = composeWithMongoose(Chat);
+exports.ChatSchema = ChatSchema;
+exports.Chat = Chat;
