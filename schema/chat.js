@@ -1,7 +1,7 @@
 const { PubSub, withFilter } = require('apollo-server-express');
 const mongoose = require('mongoose');
 
-const { Chat,ChatTC } = require('../models/chat');
+const { Chat, ChatTC } = require('../models/chat');
 const constants = require('../constants');
 const pubsub = new PubSub();
 
@@ -13,24 +13,29 @@ exports.ChatQuery = {
 
 exports.ChatMutation = {
 	chatCreateOne: ChatTC.getResolver('createOne').wrapResolve(next => async rp => {
-		let messages = await Chat.findOne({ firID: rp.args.record.firID }, async function (err, doc) {
-			if (doc) {
-				let content = {
-					text: rp.args.record.content[0].text,
-					timestamp: rp.args.record.content[0].timestamp,
-					senderID: mongoose.Types.ObjectId(rp.args.record.content[0].senderID),
-				}
-				doc.content = [...doc.content, content];
-				let msg = await doc.save();
-				return msg;
-			} else {
-				let msg = await next(rp);
-				return msg;
+		let message = await Chat.findOne({ firID: rp.args.record.firID });
+		let msg;
+		if (message) {
+			let content = {
+				text: rp.args.record.content[0].text,
+				timestamp: rp.args.record.content[0].timestamp,
+				senderID: mongoose.Types.ObjectId(rp.args.record.content[0].senderID),
 			}
-		});
-		pubsub.publish(constants.ANY_MESSAGES_FOR_ME, { newlyCreatedMessage: rp.args.record, for: rp.args.record.receiverID });
-		return messages;
-	}),
+			message.content = [...message.content, content];
+			msg = await message.save();
+			let msgToBeReturned = {
+				'recordId': msg._id,
+				'record': msg
+			}
+			pubsub.publish(constants.ANY_MESSAGES_FOR_ME, { newlyCreatedMessage: rp.args.record, for: rp.args.record.receiverID });
+			return msgToBeReturned;
+		}
+		else {
+			msg = await next(rp);
+			pubsub.publish(constants.ANY_MESSAGES_FOR_ME, { newlyCreatedMessage: rp.args.record, for: rp.args.record.receiverID });
+			return msg;
+		}
+	})
 };
 
 exports.ChatSubscription = {
